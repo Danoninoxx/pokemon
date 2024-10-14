@@ -1,0 +1,105 @@
+/* Estilo para añadir un fondo */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./img/pokemon_background4.gif'); /* Cambia esta ruta a la imagen que desees */
+    background-size: cover; /* Ajusta el tamaño de la imagen de fondo para cubrir toda la pantalla */
+    background-position: center;
+    background-attachment: fixed; /* El fondo permanecerá fijo al hacer scroll */
+    text-align: center;
+    color: #333; /* Mantén el color del texto legible */
+}
+
+/* Aseguramos que las secciones clave sean legibles */
+.log-container, .container, .buttons {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente para mejor legibilidad */
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.player {
+    width: 40%;
+}
+
+.player h2 {
+    margin-bottom: 10px;
+}
+
+.pokemon {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pokemon img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.active-pokemon img {
+    width: 200px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.active-pokemon p {
+    font-weight: bold;
+}
+
+.log {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 60%;
+    margin: 20px auto;
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+.log-container {
+    display: flex;
+    justify-content: center;
+}
+
+textarea#log {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 60%;
+    height: 200px;
+    resize: none;
+    overflow-y: scroll;
+    font-family: Arial, sans-serif;
+}
+
+.buttons {
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pokemon-life {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Clase para cambiar la imagen a blanco y negro */
+.dead-pokemon {
+    filter: grayscale(100%);
+}

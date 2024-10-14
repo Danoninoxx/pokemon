@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon't</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Pokemon Oficial en HD 1080p</h1>
+
+    <div class="container">
+        <!-- Jugador 1 -->
+        <div class="player" id="player1">
+            <h2>Jugador 1</h2>
+            <div class="pokemon" id="pokemon-list-player1"></div>
+            <div class="active-pokemon" id="active-pokemon1"></div>
+        </div>
+
+        <!-- Jugador 2 -->
+        <div class="player" id="player2">
+            <h2>Jugador 2</h2>
+            <div class="pokemon" id="pokemon-list-player2"></div>
+            <div class="active-pokemon" id="active-pokemon2"></div>
+        </div>
+    </div>
+
+    <!-- Log de combate -->
+    <div class="log-container">
+        <textarea id="log" readonly></textarea>
+    </div>
+
+    <!-- Botones -->
+    <div class="buttons">
+        <button onclick="combat()">Lucha</button>
+        <button onclick="reset()">Reiniciar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

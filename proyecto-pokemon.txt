@@ -1,0 +1,17 @@
+Titulo
+
+2 Jugadores
+
+3 Pokemon por Jugador
+
+Imagen para cada pokemon
+
+Cuando eliges 1 pokemon te muestra debajo de tu equipo la imagen en grande
+
+En medio ponemos un log de las ultimas acciones. (entre los dos pokemons activos)
+
+Boton lucha
+
+Boton reiniciar
+
+Vida debajo de la foto de cada pokemon
