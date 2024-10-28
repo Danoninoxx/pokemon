@@ -209,17 +209,94 @@ function updateVida() {
 function checkDefeat() {
 	const allPokemonDeadP1 = copiaP1.every((pokemon) => pokemon.vidaActual <= 0)
 	const allPokemonDeadP2 = copiaP2.every((pokemon) => pokemon.vidaActual <= 0)
+	const login = async (email, password) => {
+		const options = {
+			method: 'POST',
+			headers: {
+				'User-Agent': 'insomnia/10.1.0',
+				apikey:
+					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1ZG5jZWdnbHdlYWZvZmlwa3N1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1MDMwNDEsImV4cCI6MjA0NDA3OTA0MX0.usSaU9Ff74UTnPVjExUs0t68TN1T98O97IcbrBLDQKw',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ email, password }),
+		}
+
+		try {
+			const response = await fetch(
+				'https://zudncegglweafofipksu.supabase.co/auth/v1/token?grant_type=password',
+				options,
+			)
+
+			const data = await response.json()
+
+			// Check if login was successful (modify according to your API's response)
+			if (response.ok) {
+				if (data.access_token) {
+					return {
+						success: true,
+						message: 'Login successful!',
+						token: data.access_token,
+					}
+				} else {
+					return { success: false, message: 'Invalid credentials.' }
+				}
+			} else {
+				// Handle different types of errors
+				return {
+					success: false,
+					message: data.error_description || 'Error logging in.',
+				}
+			}
+		} catch (err) {
+			console.error('Error logging in:', err)
+			return {
+				success: false,
+				message: 'An error occurred. Please try again later.',
+			}
+		}
+	}
+	const datos = login('ldanicp1998@gmail.com', '123456789')
+	const actualizarPokemon = async (vidapok, nombre, accessToken) => {
+		const options = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				'User-Agent': 'insomnia/10.1.0',
+				apikey:
+					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1ZG5jZWdnbHdlYWZvZmlwa3N1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1MDMwNDEsImV4cCI6MjA0NDA3OTA0MX0.usSaU9Ff74UTnPVjExUs0t68TN1T98O97IcbrBLDQKw',
+				Authorization: `Bearer ${accessToken}`,
+				Prefer: 'return=minimal',
+			},
+			body: JSON.stringify({ vida: vidapok * 1.2 }),
+		}
+
+		try {
+			const response = await fetch(
+				`https://zudncegglweafofipksu.supabase.co/rest/v1/pokemon?nombre=eq.${nombre}`,
+				options,
+			)
+			console.log('Pokemon updated successfully:', response)
+		} catch (err) {
+			console.error('Error updating Pokemon:', err)
+		}
+	}
 
 	if (allPokemonDeadP1) {
 		document.getElementById('log').value += `\n¡Jugador 2 ha ganado el combate!`
 		disableCombatButtons()
 		displayVictoryDefeat(2) // Jugador 2 gana
+		copiaP2.forEach((pokemon) => {
+			actualizarPokemon(pokemon.vidaActual, pokemon.nombre, datos.token)
+		})
 	}
 
 	if (allPokemonDeadP2) {
 		document.getElementById('log').value += `\n¡Jugador 1 ha ganado el combate!`
 		disableCombatButtons()
 		displayVictoryDefeat(1) // Jugador 1 gana
+		copiaP1.forEach((pokemon) => {
+			actualizarPokemon(pokemon.vidaActual, pokemon.nombre, datos.token)
+		})
 	}
 }
 
